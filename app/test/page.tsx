@@ -1,9 +1,8 @@
 "use client";
-import React, { useRef, useState } from "react";
+import React, { useState } from "react";
 import axios from "axios";
 
-function page() {
-	const ref = useRef(null);
+function ㅖㅁㅎㄷ() {
 	const [file, setFile] = useState(null);
 
 	const handleFileChange = (e: any) => {
@@ -28,10 +27,10 @@ function page() {
 	return (
 		<div>
 			<div onClick={onOCRClick}>OCR</div>
-			<input type="file" ref={ref} onChange={handleFileChange} />
+			<input type="file" onChange={handleFileChange} />
 			<div onClick={onGPTClick}>GPT</div>
 		</div>
 	);
 }
 
-export default page;
+export default ㅖㅁㅎㄷ;

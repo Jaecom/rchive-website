@@ -1,7 +1,9 @@
 import React, { useState, useEffect, ChangeEvent, useRef } from "react";
 import Image from "next/image";
 import Button from "./components/Button";
-import axios from "axios";
+import CameraIcon from "@/public/icons/camera_icon.svg";
+import CheckIcon from "@/public/icons/check_icon.svg";
+import RedoIcon from "@/public/icons/return_icon.svg";
 
 type Props = {
 	onScanComplete: (image: File) => void;
@@ -54,11 +56,11 @@ const ScanPage = (props: Props) => {
 				<div className="flex flex-col gap-1 items-center">
 					{image ? (
 						<>
-							<Button onClick={handleScanComplete} label="스캔완료" />
-							<Button outline onClick={handleButtonClick} label="다시 찍기" />
+							<Button onClick={handleScanComplete} label="스캔완료" icon={<CheckIcon />} />
+							<Button outline onClick={handleButtonClick} label="다시 찍기" icon={<RedoIcon />} />
 						</>
 					) : (
-						<Button onClick={handleButtonClick} label="편지 사진 찍기" />
+						<Button onClick={handleButtonClick} label="편지 사진 찍기" icon={<CameraIcon />} />
 					)}
 				</div>
 			</div>

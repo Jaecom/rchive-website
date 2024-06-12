@@ -5,4 +5,5 @@ export type ResultData = {
 	sender: string;
 	keywords: string[];
 	keyPhrase: string;
+	bodyText: string;
 };

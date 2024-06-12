@@ -49,7 +49,7 @@ const ScanPage = (props: Props) => {
 	return (
 		<div className="p-5 h-full flex flex-col justify-center">
 			<div className="flex flex-col gap-y-5">
-				<p className="text-center">편지를 프레인에 맞춰 스캔해주세요.</p>
+				<p className="text-center">편지를 프레임에 맞춰 스캔해주세요.</p>
 				<div className="w-full h-[200px] x-2 bg-gray-200 relative">
 					{preview && <Image src={preview} alt="Image of photo" fill style={{ objectFit: "cover" }} />}
 				</div>

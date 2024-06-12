@@ -8,13 +8,18 @@ type Props = {
 };
 
 const ResultPage = ({ result, preview }: Props) => {
-	const { emotions, date, sender, keywords, text, keyPhrase } = result;
+	const { emotions, date, sender, keywords, bodyText: textRaw, keyPhrase } = result;
 
 	const [dateValue, setDate] = useState(date);
 	const [senderValue, setSender] = useState(sender);
+	const [text, setText] = useState(textRaw);
 
 	const handleSenderChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 		setSender(e.target.value);
+	};
+
+	const handleBodyTextChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+		setText(e.target.value);
 	};
 
 	const handleDateChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -33,6 +38,14 @@ const ResultPage = ({ result, preview }: Props) => {
 				</div>
 				<div className="relative h-[200px] w-full">
 					<Image src={preview} fill alt="Letter Image" style={{ objectFit: "cover" }} />
+				</div>
+				<div className="flex flex-col gap-y-1 min-w-[200px]">
+					<label className="text-[14px] text-gray-600">텍스트</label>
+					<textarea
+						className="bg-[#FFE6E6] rounded-lg p-2 min-h-[200px]"
+						value={text}
+						onChange={handleBodyTextChange}
+					/>
 				</div>
 				<div className="flex flex-col gap-y-1">
 					<label className="text-[14px] text-gray-600">보낸 사람</label>

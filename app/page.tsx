@@ -25,7 +25,6 @@ export default function Home() {
 			setPreview(undefined);
 			return;
 		}
-
 		const objectUrl = URL.createObjectURL(image);
 		setPreview(objectUrl);
 

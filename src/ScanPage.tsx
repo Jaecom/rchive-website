@@ -7,12 +7,6 @@ import RedoIcon from "@/public/icons/return_icon.svg";
 import Webcam from "react-webcam";
 import { dataURLToFile } from "./utils/date-url-to-file";
 
-const videoConstraints = {
-	width: 1920,
-	height: 1080,
-	facingMode: process.env.NODE_ENV === "production" ? { exact: "environment" } : "user",
-};
-
 type Props = {
 	onScanComplete: (image: File) => void;
 	onImageChange: (image: File) => void;
@@ -22,12 +16,21 @@ const ScanPage = (props: Props) => {
 	const [preview, setPreview] = useState<string>();
 	const [image, setImage] = useState<File>();
 	const webcamRef = React.useRef<any>(null);
+	const isMobile = /Mobile/.test(navigator.userAgent);
+
+	const videoConstraints = {
+		height: isMobile ? { ideal: 1920 } : { ideal: 1080 },
+		width: isMobile ? { ideal: 1080 } : { ideal: 1920 },
+		facingMode: process.env.NODE_ENV === "production" ? { exact: "environment" } : "user",
+	};
+
 	const [isWebcamLoaded, setIsWebcamLoaded] = useState(false);
 
 	const handleCameraCapture = React.useCallback(() => {
 		if (!webcamRef.current) return;
 
 		const imageSrc = webcamRef.current.getScreenshot({ width: 1920, height: 1080 });
+
 		try {
 			const file = dataURLToFile(imageSrc, "webcam-image.jpeg");
 			setImage(file);

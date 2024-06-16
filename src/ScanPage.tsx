@@ -7,6 +7,7 @@ import RedoIcon from "@/public/icons/return_icon.svg";
 import Webcam from "react-webcam";
 import { dataURLToFile } from "./utils/date-url-to-file";
 import useIsMobile from "./hooks/useIsMobile";
+import useURLPreview from "./hooks/useURLPreview";
 
 const ASPECT_RATIO = {
 	width: 1920,
@@ -14,14 +15,14 @@ const ASPECT_RATIO = {
 };
 
 type Props = {
-	onScanComplete: (image: File, preview: string) => void;
+	onScanComplete: (image: File) => void;
 };
 
 const ScanPage = (props: Props) => {
-	const [preview, setPreview] = useState<string>();
 	const [image, setImage] = useState<File>();
 	const webcamRef = React.useRef<any>(null);
 	const isMobile = useIsMobile();
+	const preview = useURLPreview(image);
 
 	const videoConstraints = {
 		height: isMobile ? ASPECT_RATIO.width : ASPECT_RATIO.height,
@@ -42,18 +43,6 @@ const ScanPage = (props: Props) => {
 		} catch (e) {}
 	}, [webcamRef]);
 
-	useEffect(() => {
-		if (!image) {
-			setPreview(undefined);
-			return;
-		}
-
-		const objectUrl = URL.createObjectURL(image);
-		setPreview(objectUrl);
-
-		return () => URL.revokeObjectURL(objectUrl);
-	}, [image]);
-
 	const handleTakePhotoAgain = () => {
 		setIsWebcamLoaded(false);
 		setImage(undefined);
@@ -62,7 +51,7 @@ const ScanPage = (props: Props) => {
 	const handleScanComplete = () => {
 		if (!image) return;
 
-		props.onScanComplete(image, preview ?? "");
+		props.onScanComplete(image);
 	};
 
 	return (

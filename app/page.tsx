@@ -1,15 +1,18 @@
 "use client";
 
-import { useState } from "react";
+import { use, useState } from "react";
 import axios from "axios";
 import StartPage from "@/src/StartPage";
 import ScanPage from "@/src/ScanPage";
 import ResultPage from "@/src/ResultPage";
 import { type ResultData } from "@/src/types/result-data";
+import useURLPreview from "@/src/hooks/useURLPreview";
 
 export default function Home() {
 	const [stage, setStage] = useState("start");
-	const [preview, setPreview] = useState<string>();
+	const [image, setImage] = useState<File | undefined>();
+	const preview = useURLPreview(image);
+
 	const [resultData, setResultData] = useState<ResultData>({
 		text: "",
 		emotions: [],
@@ -20,7 +23,7 @@ export default function Home() {
 		bodyText: "",
 	});
 
-	const handleScanComplete = async (image: File, preview: string) => {
+	const handleScanComplete = async (image: File) => {
 		try {
 			setStage("ocr");
 			const formData = new FormData();
@@ -42,11 +45,11 @@ export default function Home() {
 				keyPhrase,
 				bodyText,
 			});
-			setPreview(preview);
+			setImage(image);
 			setStage("result");
 		} catch (e) {
 			setStage("scan");
-			setPreview(undefined);
+			setImage(undefined);
 		}
 	};
 

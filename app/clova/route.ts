@@ -11,7 +11,7 @@ export async function POST(request: Request) {
 
 	const imageBuffer = await file.arrayBuffer();
 
-	const resizedBuffer = await sharp(Buffer.from(imageBuffer)).jpeg({ quality: 60 }).toBuffer();
+	const resizedBuffer = await sharp(Buffer.from(imageBuffer)).jpeg({ quality: 70 }).toBuffer();
 
 	formData.append("file", new Blob([resizedBuffer], { type: file.type }));
 

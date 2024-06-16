@@ -6,21 +6,26 @@ import CheckIcon from "@/public/icons/check_icon.svg";
 import RedoIcon from "@/public/icons/return_icon.svg";
 import Webcam from "react-webcam";
 import { dataURLToFile } from "./utils/date-url-to-file";
+import useIsMobile from "./hooks/useIsMobile";
+
+const ASPECT_RATIO = {
+	width: 1920,
+	height: 1080,
+};
 
 type Props = {
-	onScanComplete: (image: File) => void;
-	onImageChange: (image: File) => void;
+	onScanComplete: (image: File, preview: string) => void;
 };
 
 const ScanPage = (props: Props) => {
 	const [preview, setPreview] = useState<string>();
 	const [image, setImage] = useState<File>();
 	const webcamRef = React.useRef<any>(null);
-	const isMobile = /Mobile/.test(navigator.userAgent);
+	const isMobile = useIsMobile();
 
 	const videoConstraints = {
-		height: isMobile ? { ideal: 1920 } : { ideal: 1080 },
-		width: isMobile ? { ideal: 1080 } : { ideal: 1920 },
+		height: isMobile ? ASPECT_RATIO.width : ASPECT_RATIO.height,
+		width: isMobile ? ASPECT_RATIO.height : ASPECT_RATIO.width,
 		facingMode: process.env.NODE_ENV === "production" ? { exact: "environment" } : "user",
 	};
 
@@ -29,7 +34,7 @@ const ScanPage = (props: Props) => {
 	const handleCameraCapture = React.useCallback(() => {
 		if (!webcamRef.current) return;
 
-		const imageSrc = webcamRef.current.getScreenshot({ width: 1920, height: 1080 });
+		const imageSrc = webcamRef.current.getScreenshot({ width: ASPECT_RATIO.width, height: ASPECT_RATIO.height });
 
 		try {
 			const file = dataURLToFile(imageSrc, "webcam-image.jpeg");
@@ -56,26 +61,32 @@ const ScanPage = (props: Props) => {
 
 	const handleScanComplete = () => {
 		if (!image) return;
-		props.onScanComplete(image);
+
+		props.onScanComplete(image, preview ?? "");
 	};
 
 	return (
 		<div className="p-5 h-full flex flex-col">
 			<div className="flex flex-col gap-y-5 mt-[25vh]">
 				<p className="text-center">편지를 프레임에 맞춰 스캔해주세요.</p>
-				<div>
-					{!isWebcamLoaded && <div className="w-full relative pt-[56.25%] bg-gray-100" />}
-					{preview ? (
-						<div className="w-full relative pt-[56.25%]">
+				<div className="outline outline-4 outline-[#E16D6D] relative bg-gray-100">
+					{preview && (
+						<div
+							className="relative"
+							style={{
+								paddingTop: `${(ASPECT_RATIO.height / ASPECT_RATIO.width) * 100}%`,
+							}}
+						>
 							<Image src={preview} alt="Image of photo" fill style={{ objectFit: "cover" }} />
 						</div>
-					) : (
+					)}
+
+					{!preview && (
 						<Webcam
-							audio={false}
-							height={1080}
+							height={ASPECT_RATIO.height}
+							width={ASPECT_RATIO.width}
 							ref={webcamRef}
 							screenshotFormat="image/jpeg"
-							width={1920}
 							videoConstraints={videoConstraints}
 							onUserMedia={() => setIsWebcamLoaded(true)}
 						/>

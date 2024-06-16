@@ -1,6 +1,6 @@
 "use client";
 
-import { ChangeEvent, useState, useEffect } from "react";
+import { useState } from "react";
 import axios from "axios";
 import StartPage from "@/src/StartPage";
 import ScanPage from "@/src/ScanPage";
@@ -10,7 +10,6 @@ import { type ResultData } from "@/src/types/result-data";
 export default function Home() {
 	const [stage, setStage] = useState("start");
 	const [preview, setPreview] = useState<string>();
-	const [image, setImage] = useState<File>();
 	const [resultData, setResultData] = useState<ResultData>({
 		text: "",
 		emotions: [],
@@ -21,18 +20,7 @@ export default function Home() {
 		bodyText: "",
 	});
 
-	useEffect(() => {
-		if (!image) {
-			setPreview(undefined);
-			return;
-		}
-		const objectUrl = URL.createObjectURL(image);
-		setPreview(objectUrl);
-
-		return () => URL.revokeObjectURL(objectUrl);
-	}, [image]);
-
-	const handleScanComplete = async (image: File) => {
+	const handleScanComplete = async (image: File, preview: string) => {
 		try {
 			setStage("ocr");
 			const formData = new FormData();
@@ -54,11 +42,11 @@ export default function Home() {
 				keyPhrase,
 				bodyText,
 			});
-
+			setPreview(preview);
 			setStage("result");
 		} catch (e) {
 			setStage("scan");
-			setImage(undefined);
+			setPreview(undefined);
 		}
 	};
 
@@ -79,9 +67,7 @@ export default function Home() {
 		<div className="w-full h-full flex justify-center">
 			<div className="w-full">
 				{stage === "start" && <StartPage onNextStage={() => setStage("scan")} />}
-				{stage === "scan" && (
-					<ScanPage onScanComplete={handleScanComplete} onImageChange={(image) => setImage(image)} />
-				)}
+				{stage === "scan" && <ScanPage onScanComplete={handleScanComplete} />}
 				{(stage === "ocr" || stage === "gpt") && (
 					<div className="h-full w-full flex flex-col justify-center items-center">
 						<div className="sk-folding-cube" style={cubeStyle}>

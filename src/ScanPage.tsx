@@ -1,3 +1,5 @@
+"use client";
+
 import React, { useState, useEffect, ChangeEvent, useRef } from "react";
 import Image from "next/image";
 import Button from "./components/Button";
@@ -20,17 +22,9 @@ type Props = {
 
 const ScanPage = (props: Props) => {
 	const [image, setImage] = useState<File>();
-	const webcamRef = React.useRef<any>(null);
+	const webcamRef = useRef<any>(null);
 	const isMobile = useIsMobile();
 	const preview = useURLPreview(image);
-
-	const videoConstraints = {
-		height: isMobile ? ASPECT_RATIO.width : ASPECT_RATIO.height,
-		width: isMobile ? ASPECT_RATIO.height : ASPECT_RATIO.width,
-		facingMode: process.env.NODE_ENV === "production" ? { exact: "environment" } : "user",
-	};
-
-	const [isWebcamLoaded, setIsWebcamLoaded] = useState(false);
 
 	const handleCameraCapture = React.useCallback(() => {
 		if (!webcamRef.current) return;
@@ -44,7 +38,6 @@ const ScanPage = (props: Props) => {
 	}, [webcamRef]);
 
 	const handleTakePhotoAgain = () => {
-		setIsWebcamLoaded(false);
 		setImage(undefined);
 	};
 
@@ -70,16 +63,19 @@ const ScanPage = (props: Props) => {
 						</div>
 					)}
 
-					{!preview && (
-						<Webcam
-							height={ASPECT_RATIO.height}
-							width={ASPECT_RATIO.width}
-							ref={webcamRef}
-							screenshotFormat="image/jpeg"
-							videoConstraints={videoConstraints}
-							onUserMedia={() => setIsWebcamLoaded(true)}
-						/>
-					)}
+					<Webcam
+						height={ASPECT_RATIO.height}
+						width={ASPECT_RATIO.width}
+						ref={webcamRef}
+						style={{ display: preview ? "none" : "block" }}
+						screenshotFormat="image/jpeg"
+						videoConstraints={{
+							//Inverse due to portrait mode
+							height: ASPECT_RATIO.width,
+							width: ASPECT_RATIO.height,
+							facingMode: "environment",
+						}}
+					/>
 				</div>
 				<div className="flex flex-col gap-1 items-center">
 					{image ? (
@@ -89,7 +85,7 @@ const ScanPage = (props: Props) => {
 						</>
 					) : (
 						<>
-							{isWebcamLoaded && <Button onClick={handleCameraCapture} label="편지 사진 찍기" icon={<CameraIcon />} />}
+							<Button onClick={handleCameraCapture} label="편지 사진 찍기" icon={<CameraIcon />} />
 						</>
 					)}
 				</div>

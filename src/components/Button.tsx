@@ -3,16 +3,18 @@ import React from "react";
 
 type Props = {
 	onClick: () => void;
-	children?: React.ReactNode;
 	outline?: boolean;
 	label: string;
 	icon?: React.ReactNode;
+	className?: string;
 };
 
-const Button = ({ onClick, children, outline, label, icon }: Props) => {
+const Button = ({ onClick, outline, label, icon, className }: Props) => {
 	return (
 		<button
-			className={`${outline ? "" : "bg-[#E16D6D]"} ${outline ? "text-[#E16D6D]" : "text-white"} py-2 px-5 rounded-md`}
+			className={`${outline ? "" : "bg-[#E16D6D]"} ${
+				outline ? "text-[#E16D6D]" : "text-white"
+			} py-2 px-5 rounded-md ${className}`}
 			onClick={onClick}
 		>
 			<div className="flex justify-center items-center gap-x-1.5">

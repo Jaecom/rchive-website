@@ -2,14 +2,14 @@
 
 import React, { useState, useEffect, ChangeEvent, useRef } from "react";
 import Image from "next/image";
-import Button from "./components/Button";
+import Button from "../../components/Button";
 import CameraIcon from "@/public/icons/camera_icon.svg";
 import CheckIcon from "@/public/icons/check_icon.svg";
 import RedoIcon from "@/public/icons/return_icon.svg";
 import Webcam from "react-webcam";
-import { dataURLToFile } from "./utils/date-url-to-file";
-import useIsMobile from "./hooks/useIsMobile";
-import useURLPreview from "./hooks/useURLPreview";
+import { dataURLToFile } from "../../utils/date-url-to-file";
+import useIsMobile from "../../hooks/useIsMobile";
+import useURLPreview from "../../hooks/useURLPreview";
 
 const ASPECT_RATIO = {
 	width: 1920,
@@ -80,12 +80,17 @@ const ScanPage = (props: Props) => {
 				<div className="flex flex-col gap-1 items-center">
 					{image ? (
 						<>
-							<Button onClick={handleScanComplete} label="스캔완료" icon={<CheckIcon />} />
+							<Button className="shadow-md" onClick={handleScanComplete} label="스캔완료" icon={<CheckIcon />} />
 							<Button outline onClick={handleTakePhotoAgain} label="다시 찍기" icon={<RedoIcon />} />
 						</>
 					) : (
 						<>
-							<Button onClick={handleCameraCapture} label="편지 사진 찍기" icon={<CameraIcon />} />
+							<Button
+								className="shadow-md"
+								onClick={handleCameraCapture}
+								label="편지 사진 찍기"
+								icon={<CameraIcon />}
+							/>
 						</>
 					)}
 				</div>

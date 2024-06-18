@@ -1,8 +1,8 @@
 import React from "react";
-import IndexPage from "@/src/IndexPage";
+import HomePage from "@/src/page/home/HomePage";
 
 const page = () => {
-	return <IndexPage />;
+	return <HomePage />;
 };
 
 export default page;

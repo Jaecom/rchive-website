@@ -2,12 +2,13 @@
 
 import { use, useState } from "react";
 import axios from "axios";
-import StartPage from "./StartPage";
-import ScanPage from "./ScanPage";
-import ResultPage from "./ResultPage";
+import StartScreen from "./StartScreen";
+import ScanScreen from "./ScanScreen";
+import ResultScreen from "./ResultScreen";
 import { type ResultData } from "@/src/types/result-data";
 import useURLPreview from "@/src/hooks/useURLPreview";
 import LoadingElement from "@/src/components/LoadingElement";
+import { fakeData } from "@/src/utils/fake-data";
 
 const IndexPage = () => {
 	const [stage, setStage] = useState("start");
@@ -52,21 +53,11 @@ const IndexPage = () => {
 		}
 	};
 
-	const fakeData = {
-		bodyText:
-			"To.5학년 3반 친구들\n 얘들아 안녕! 나 보민이야.\n 4학년 때는 시간이 정신없이 지났는데,\n 5학년이 되고 나서는 여러가지 감정을 느낄수 있었어.\n 나에게도 '행복' 이라는 감정을 선물해줘서 고마워.\n 이번한해가 코로나 때문에 기억에 남을 거야.\n 하지만 나는 너희와 같은 반에서 즐겁게 지낸게\n 기억에 남아 나에게 좋은 추억 만들어줘서 고마워!\n 2021/12/27\n From. 5학년이 행복했던 - 보민이가",
-		emotions: ["감사", "축하", "우정"],
-		date: "2022-01-01",
-		sender: "재윤",
-		keywords: ["행복", "코로나", "추억"],
-		keyPhrase: "기억에 남아 나에게 좋은 추억 만들어줘서 고마워!",
-	};
-
 	return (
 		<div className="w-full h-full flex justify-center">
 			<div className="w-full">
-				{stage === "start" && <StartPage onNextStage={() => setStage("scan")} />}
-				{stage === "scan" && <ScanPage onScanComplete={handleScanComplete} />}
+				{stage === "start" && <StartScreen onNextStage={() => setStage("scan")} />}
+				{stage === "scan" && <ScanScreen onScanComplete={handleScanComplete} />}
 				{(stage === "ocr" || stage === "gpt") && (
 					<LoadingElement
 						color={stage === "ocr" ? "#afb2d0" : "#E16D6D"}
@@ -74,7 +65,7 @@ const IndexPage = () => {
 					/>
 				)}
 				{stage === "result" && (
-					<ResultPage
+					<ResultScreen
 						result={resultData}
 						preview={
 							preview ??

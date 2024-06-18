@@ -20,7 +20,7 @@ type Props = {
 	onScanComplete: (image: File) => void;
 };
 
-const ScanPage = (props: Props) => {
+const ScanScreen = (props: Props) => {
 	const [image, setImage] = useState<File>();
 	const webcamRef = useRef<any>(null);
 	const isMobile = useIsMobile();
@@ -99,4 +99,4 @@ const ScanPage = (props: Props) => {
 	);
 };
 
-export default ScanPage;
+export default ScanScreen;

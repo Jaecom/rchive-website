@@ -11,7 +11,7 @@ type Props = {
 	preview: string;
 };
 
-const ResultPage = ({ result, preview }: Props) => {
+const ResultScreen = ({ result, preview }: Props) => {
 	const { emotions, date: dateRaw, sender, keywords, bodyText: textRaw, keyPhrase } = result;
 
 	const [date, setDate] = useState(dateRaw);
@@ -134,4 +134,4 @@ const ResultPage = ({ result, preview }: Props) => {
 	);
 };
 
-export default ResultPage;
+export default ResultScreen;

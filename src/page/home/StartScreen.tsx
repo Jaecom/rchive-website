@@ -4,6 +4,7 @@ import React from "react";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import Image from "next/image";
+import CharacterIcon from "@/public/icons/character_icon.svg";
 
 gsap.registerPlugin(useGSAP);
 
@@ -11,9 +12,11 @@ type Props = {
 	onNextStage: () => void;
 };
 
-const StartPage = (props: Props) => {
+const StartScreen = (props: Props) => {
 	useGSAP(() => {
-		gsap.fromTo(
+		const tl = gsap.timeline();
+
+		tl.fromTo(
 			"#start-logo",
 			{
 				opacity: 0,
@@ -27,7 +30,7 @@ const StartPage = (props: Props) => {
 			}
 		);
 
-		gsap.fromTo(
+		tl.fromTo(
 			"#start-content",
 			{
 				opacity: 0,
@@ -38,11 +41,11 @@ const StartPage = (props: Props) => {
 				y: 0,
 				ease: "power1.out",
 				duration: 0.6,
-				delay: 0.1,
-			}
+			},
+			0.1
 		);
 
-		gsap.fromTo(
+		tl.fromTo(
 			"#start-button",
 			{
 				opacity: 0,
@@ -52,14 +55,33 @@ const StartPage = (props: Props) => {
 				opacity: 1,
 				y: 0,
 				ease: "power1.inOut",
+			},
+			0.6
+		);
+
+		tl.fromTo(
+			"#start-character",
+			{
+				x: -10,
+				rotation: -5,
+			},
+			{
+				x: 0,
+				opacity: 1,
+				ease: "power1.inOut",
+				rotation: 0,
 				duration: 0.4,
-				delay: 0.6,
 			}
 		);
 	}, []);
 
 	return (
-		<div className="h-full flex flex-col gap-y-6 justify-center items-center relative">
+		<div className="h-full flex flex-col gap-y-4 justify-center items-center relative overflow-hidden">
+			<div id="start-character" className="absolute right-0 bottom-0 opacity-0">
+				<div className="translate-x-5 translate-y-6">
+					<CharacterIcon />
+				</div>
+			</div>
 			<div id="start-image" className="absolute inset-0">
 				<Image
 					priority
@@ -105,4 +127,4 @@ const StartPage = (props: Props) => {
 	);
 };
 
-export default StartPage;
+export default StartScreen;

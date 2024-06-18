@@ -78,7 +78,7 @@ const StartScreen = (props: Props) => {
 	return (
 		<div className="h-full flex flex-col gap-y-4 justify-center items-center relative overflow-hidden">
 			<div id="start-character" className="absolute right-0 bottom-0 opacity-0">
-				<div className="translate-x-5 translate-y-6">
+				<div className="translate-x-10 translate-y-10">
 					<CharacterIcon />
 				</div>
 			</div>
@@ -96,17 +96,17 @@ const StartScreen = (props: Props) => {
 				/>
 			</div> */}
 
-			<div className="flex flex-col gap-y-4 text-center text-primary">
-				<p id="start-logo" className="text-[16px] opacity-0 tracking-[4px]">
+			<div className="flex flex-col gap-y-[20px] text-center">
+				<p id="start-logo" className="text-[22px] font-black opacity-0 text-primary">
 					R.Chive
 				</p>
-				<p id="start-content" className="text-[40px] leading-[1.3] font-bold mt-[-10px] opacity-0">
-					편지 등록을 <br /> 시작해볼까요?
+				<p id="start-content" className="text-[20px] leading-[1.3] text-gray-500 font-extrabold mt-[-10px] opacity-0">
+					알알이와 편지 등록을 시작해볼까요?
 				</p>
 			</div>
 			<button
 				id="start-button"
-				className="bg-primary font-medium text-white py-2 px-8 rounded-[10px] opacity-0 shadow-md"
+				className="bg-primary mt-[86px] font-medium text-white py-2 px-8 rounded-[10px] opacity-0 shadow-md"
 				onClick={props.onNextStage}
 			>
 				시작하기

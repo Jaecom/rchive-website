@@ -9,11 +9,12 @@ export async function POST(request: Request) {
 
 	const formData = new FormData();
 
-	const imageBuffer = await file.arrayBuffer();
+	formData.append("file", file);
+	// const imageBuffer = await file.arrayBuffer();
 
-	const resizedBuffer = await sharp(Buffer.from(imageBuffer)).jpeg({ quality: 60 }).toBuffer();
+	// const resizedBuffer = await sharp(Buffer.from(imageBuffer)).jpeg({ quality: 60 }).toBuffer();
 
-	formData.append("file", new Blob([resizedBuffer], { type: file.type }));
+	// formData.append("file", new Blob([resizedBuffer], { type: file.type }));
 
 	formData.append(
 		"message",

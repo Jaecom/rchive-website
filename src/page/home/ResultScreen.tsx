@@ -64,7 +64,7 @@ const ResultScreen = ({ result, preview }: Props) => {
 					</div>
 					<div
 						id="result-key-text"
-						className="mx-auto max-w-[90%] mt-1 text-[22px] font-bold text-primary break-keep opacity-0"
+						className="mx-auto max-w-[320px] mt-1 text-[22px] font-bold text-primary break-keep opacity-0"
 					>
 						“{keyPhrase}”
 					</div>

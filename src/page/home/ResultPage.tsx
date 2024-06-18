@@ -117,7 +117,7 @@ const ResultPage = ({ result, preview }: Props) => {
 					</div>
 				)}
 
-				{emotions.length > 0 && (
+				{keywords.length > 0 && (
 					<div className="flex flex-col gap-y-1">
 						<label className="text-[14px] text-gray-600">AI 키워드</label>
 						<ul className="flex gap-x-2 gap-y-2 flex-wrap">

@@ -20,7 +20,7 @@ const StartScreen = (props: Props) => {
 			"#start-logo",
 			{
 				opacity: 0,
-				y: -30,
+				y: -20,
 			},
 			{
 				opacity: 1,
@@ -96,24 +96,12 @@ const StartScreen = (props: Props) => {
 				/>
 			</div>
 
-			<div className="text-center text-primary">
-				<p
-					id="start-logo"
-					className="text-[50px] font-extrabold opacity-0"
-					style={{
-						textShadow: "1px 1px 2px #00000010",
-					}}
-				>
+			<div className="flex flex-col gap-y-4 text-center text-primary">
+				<p id="start-logo" className="text-[16px] opacity-0 tracking-[4px]">
 					R.Chive
 				</p>
-				<p
-					id="start-content"
-					className="text-[19px] font-medium mt-[-10px] opacity-0"
-					style={{
-						textShadow: "1px 1px 2px #00000010",
-					}}
-				>
-					편지 등록을 시작해보세요
+				<p id="start-content" className="text-[40px] leading-[1.3] font-bold mt-[-10px] opacity-0">
+					편지 등록을 <br /> 시작해볼까요?
 				</p>
 			</div>
 			<button

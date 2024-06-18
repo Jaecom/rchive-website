@@ -5,5 +5,5 @@ export const fakeData = {
 	date: "2022-01-01",
 	sender: "재윤",
 	keywords: ["행복", "코로나", "추억"],
-	keyPhrase: "기억에 남아 나에게 좋은 추억 만들어줘서 고마워!",
+	keySentence: "기억에 남아 나에게 좋은 추억 만들어줘서 고마워!",
 };

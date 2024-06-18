@@ -12,7 +12,7 @@ type Props = {
 };
 
 const ResultScreen = ({ result, preview }: Props) => {
-	const { emotions, date: dateRaw, sender, keywords, bodyText: textRaw, keyPhrase } = result;
+	const { emotions, date: dateRaw, sender, keywords, bodyText: textRaw, keySentence } = result;
 
 	const [date, setDate] = useState(dateRaw);
 	const [senderValue, setSender] = useState(sender);
@@ -66,7 +66,7 @@ const ResultScreen = ({ result, preview }: Props) => {
 						id="result-key-text"
 						className="mx-auto max-w-[320px] mt-1 text-[22px] font-bold text-primary break-keep opacity-0"
 					>
-						“{keyPhrase}”
+						“{keySentence}”
 					</div>
 				</div>
 				<div id="result-line" className="my-5 w-[1.5px] h-[100px] bg-primary opacity-0" />

@@ -20,7 +20,7 @@ const IndexPage = () => {
 		date: "",
 		sender: "",
 		keywords: [],
-		keyPhrase: "",
+		keySentence: "",
 		bodyText: "",
 	});
 
@@ -35,14 +35,14 @@ const IndexPage = () => {
 
 			setStage("gpt");
 			const { data: gptData } = await axios.post("/gpt", { text }, { headers: { "Content-Type": "application/json" } });
-			const { emotions, date, sender, keywords, keyPhrase, bodyText } = gptData.data;
+			const { emotions, date, sender, keywords, keySentence, bodyText } = gptData.data;
 
 			setResultData({
 				emotions,
 				date,
 				sender,
 				keywords,
-				keyPhrase,
+				keySentence,
 				bodyText,
 			});
 			setImage(image);

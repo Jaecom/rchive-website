@@ -3,6 +3,6 @@ export type ResultData = {
 	date: string;
 	sender: string;
 	keywords: string[];
-	keyPhrase: string;
+	keySentence: string;
 	bodyText: string;
 };

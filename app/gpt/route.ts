@@ -26,7 +26,7 @@ export async function POST(request: Request) {
               "sender": "sender",
               "keywords": ["keyword1", ...],
 							"bodyText": "bodyText"
-							"keyPhrase": "keyPhrases or sentences from the bodyText that is the core of the letter",
+							"keySentence": "Key sentence from the bodyText that is the core of the letter",
             }.
             Put empty string if the field cannot be found.
             Date should be in the format of YYYY-MM-DD.`,

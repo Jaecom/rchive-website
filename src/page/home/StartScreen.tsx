@@ -82,7 +82,7 @@ const StartScreen = (props: Props) => {
 					<CharacterIcon />
 				</div>
 			</div>
-			<div id="start-image" className="absolute inset-0">
+			{/* <div id="start-image" className="absolute inset-0">
 				<Image
 					priority
 					src={"/images/envelope_background.jpg"}
@@ -94,7 +94,7 @@ const StartScreen = (props: Props) => {
 					className="z-[-2]"
 					quality={100}
 				/>
-			</div>
+			</div> */}
 
 			<div className="flex flex-col gap-y-4 text-center text-primary">
 				<p id="start-logo" className="text-[16px] opacity-0 tracking-[4px]">

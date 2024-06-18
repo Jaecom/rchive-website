@@ -1,8 +1,10 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Noto_Sans_KR } from "next/font/google";
 import "./globals.css";
 
-const inter = Inter({ subsets: ["latin"] });
+const notoSans = Noto_Sans_KR({
+	subsets: ["latin"],
+});
 
 export const metadata: Metadata = {
 	title: "R.chive Prototype",
@@ -16,7 +18,7 @@ export default function RootLayout({
 }>) {
 	return (
 		<html lang="en">
-			<body className={inter.className}>
+			<body className={notoSans.className}>
 				<main className="w-full h-[calc(100dvh)] flex overflow-auto justify-center">
 					<div className="w-full max-w-[425px] h-full">{children}</div>
 				</main>

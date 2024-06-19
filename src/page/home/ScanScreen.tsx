@@ -69,7 +69,7 @@ const ScanScreen = (props: Props) => {
 						ref={webcamRef}
 						style={{ display: preview ? "none" : "block" }}
 						screenshotFormat="image/jpeg"
-						screenshotQuality={0.3}
+						screenshotQuality={0.4}
 						videoConstraints={{
 							//Inverse due to portrait mode
 							height: ASPECT_RATIO.width,

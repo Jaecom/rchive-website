@@ -5,18 +5,20 @@ import { type ResultData } from "@/src/types/result-data";
 import Image from "next/image";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
+import useURLPreview from "@/src/hooks/useURLPreview";
 
 type Props = {
 	result: ResultData;
-	preview: string;
+	image: File | undefined;
 };
 
-const ResultScreen = ({ result, preview }: Props) => {
+const ResultScreen = ({ result, image }: Props) => {
 	const { emotions, date: dateRaw, sender, keywords, bodyText: textRaw, keySentence } = result;
 
 	const [date, setDate] = useState(dateRaw);
 	const [senderValue, setSender] = useState(sender);
 	const [text, setText] = useState(textRaw);
+	const preview = useURLPreview(image);
 
 	useGSAP(() => {
 		const tl = gsap.timeline();
@@ -74,7 +76,15 @@ const ResultScreen = ({ result, preview }: Props) => {
 
 			<div id="result-content" className="flex flex-col gap-y-5 opacity-0">
 				<div className="relative h-[200px] w-full">
-					<Image src={preview} fill alt="Letter Image" style={{ objectFit: "cover" }} />
+					<Image
+						src={
+							preview ??
+							"https://images.unsplash.com/photo-1718049720096-7f1af82d69af?w=400&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwyfHx8ZW58MHx8fHx8"
+						}
+						fill
+						alt="Letter Image"
+						style={{ objectFit: "cover" }}
+					/>
 				</div>
 
 				<div className="flex flex-col gap-y-1 min-w-[200px]">

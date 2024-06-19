@@ -64,15 +64,7 @@ const IndexPage = () => {
 						text={stage === "ocr" ? "편지 인식중..." : "AI로 분석중..."}
 					/>
 				)}
-				{stage === "result" && (
-					<ResultScreen
-						result={resultData}
-						preview={
-							preview ??
-							"https://images.unsplash.com/photo-1718049720096-7f1af82d69af?w=400&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwyfHx8ZW58MHx8fHx8"
-						}
-					/>
-				)}
+				{stage === "result" && <ResultScreen result={resultData} image={image} />}
 			</div>
 		</div>
 	);
